@@ -27,6 +27,7 @@
 			<version>${junitVersion}</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
