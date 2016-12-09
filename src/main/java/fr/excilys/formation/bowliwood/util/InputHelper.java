@@ -4,6 +4,8 @@ import java.awt.font.NumericShaper;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import fr.excilys.formation.bowliwood.Player;
+
 import static java.lang.Integer.parseInt;
 
 
@@ -35,4 +37,15 @@ public final class InputHelper {
 
         return in;
     }
+    
+    public static Player[] namePlayersInput(int nbPlayer) {
+    	Player[] names =  new Player[nbPlayer] ;
+    	Scanner sin =  new Scanner(System.in) ;
+    	for (int i = 0 ; i < nbPlayer ; i++) {
+    		System.out.println("Entrer le nom du joueur " + (i+1) ) ;
+    		names[i] = new Player(sin.nextLine()) ;
+    	}
+    	return names ;
+    }
+    
 }

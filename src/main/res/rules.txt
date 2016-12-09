@@ -1,0 +1,15 @@
+Le bowling est un jeu simple. Il consiste à renverser les 10 quilles en faisant rouler la boule sur une piste de 20 m de long.
+
+Chaque partie comprend 10 jeux ou frames. Les participants jouent chacun leur tour. Le joueur lance 2 boules à chaque jeu et marque le nombre de points correspondant au nombre de quilles tombées.
+
+Si les 10 quilles tombent en deux lancers, le joueur a fait un SPARE(/); il marque 10 points plus les points du lancer suivant.
+
+Si les 10 Quilles tombent au premier lancer, le joueur a fait un STRIKE (X); Il marque 10 points plus les points des 2 lancés suivants.
+
+Au dixième jeu, si le joueur réalise un Spare ou un Strike, il bénéficie d'1 ou 2 lancer(s) supplementaire(s)
+
+Compte tenu de ces bonifications, le maximum de points par partie est de 300, mais un joueur débutant s’estime satisfait avec 100 points.
+
+Une boule pèse entre 3 à 7 kg, et l’on effectue de 13 à 21 lancers.
+
+Bon score = 130 pour un joueur débutant, 180 pour un joueur confirmé.
