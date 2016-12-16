@@ -46,4 +46,26 @@ public final class InputHelper {
     	return names ;
     }
     
+    public static int scoreInput(Scanner sc) {
+    	boolean done = false ;
+    	int in = 0 ;
+    	System.out.println("Entrer le score");
+        do {
+            try {
+                in = parseInt(sc.nextLine()) ;
+                if (in < 0 || in > 10) {
+                    throw new NumberFormatException() ;
+                }
+                done = true;
+            } catch (NumberFormatException e) {
+
+            }
+            if (!done) {
+                System.err.println("Entrer un score entre 0 et 10");
+            }
+
+        } while (!done && sc.hasNextLine());
+        return in ;
+    }
+    
 }

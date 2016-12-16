@@ -24,15 +24,5 @@ public class GameTest {
 		assertEquals(g.getPlayers()[2].getName(),"j3") ;
 		sc.close() ;
 	}
-	
-	@Test
-	public void illegalInit() {
-		Game g = new Game() ;
-		ByteArrayInputStream in = new ByteArrayInputStream("3\nj1\nj2\nj3\n".getBytes()) ;
-		System.setIn(in);
-		Scanner sc = new Scanner(System.in) ;
-		g.init(sc) ;
-		assertThrows() ;
-	}
 
 }
