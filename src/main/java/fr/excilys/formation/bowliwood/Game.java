@@ -16,6 +16,16 @@ public class Game {
     private static final int NB_ROUNDS = 10;
     private int currentRound ;
     
+    public void setGame(int currentRound, int idCurrentPlayer, String ...playerNames ) {
+    	this.currentRound = currentRound ;
+    	this.idCurrentPlayer = idCurrentPlayer ;
+    	players = new Player[playerNames.length] ;
+    	for (int i = 0 ; i < players.length ; i++) {
+    		players[i] = new Player(playerNames[i]) ;
+    	}
+    	//TODO set initial scores
+    }
+    
     public Player[] getPlayers() {
     	return players ;
     }
@@ -29,9 +39,10 @@ public class Game {
         for (int i = 0 ; i < nbPlayer ; i++) {
         	System.out.print(players[i].getName() + " ") ;
         }
+        System.out.print("\n");
     }
     
-    public void run() {
+    public void run(Scanner sc) {
     	if (players.length == 0) {
     		System.out.println("Le jeu doit etre initialise avant d'etre lance.") ;
     		return ;
@@ -41,34 +52,66 @@ public class Game {
     		for (idCurrentPlayer=0 ; idCurrentPlayer<players.length ; idCurrentPlayer++) {
     			OutPutHelper.clearOutput() ;
         		displayScore() ;
-        		try {
-					Thread.sleep(500) ;
-				} catch (InterruptedException e) {
-					// TODO 3Auto-generated catch block
-					e.printStackTrace();
-				}
+        		doRound(sc);
         	}
     	}
     }
     
+    public void doRound(Scanner sc) {
+    	int maxRoundThrow = currentRound != 9 ? 2 : 3 ;
+    	boolean keepThrowing = true ;
+    	int idThrow = 0 ;
+    	int scoreRound = 0 ;
+    	int scoreThrow ;
+    	
+    	while (keepThrowing) {
+    		do {
+    			scoreThrow = InputHelper.scoreInput(sc) ;
+    			if (scoreThrow + scoreRound > 10) {
+    				System.out.println("Score invalide: la somme des lancers dépasse le nombre total de quilles.");
+    			}
+    		} while (scoreThrow + scoreRound > 10) ;
+    		
+    		players[idCurrentPlayer].setScore(currentRound, idThrow, scoreThrow) ;
+    		scoreRound += scoreThrow ;
+    		
+    		if (scoreRound == 10) {
+    			keepThrowing = false ;
+    		} else {
+    			idThrow++ ;
+        		if (idThrow >= maxRoundThrow) {
+        			keepThrowing = false ;
+        		}
+    		}
+    	}
+    }
     
     private void displayScore() {
+    	int maxThrowRound = currentRound != 9 ? 2 : 3 ;
     	System.out.println("---------------------------------------------------") ;
     	System.out.println("Tour: " + (currentRound + 1)) ;
     	for (int p=0 ; p<players.length ; p++) {
-    		System.out.println((p == idCurrentPlayer ? "* ":"  ") + players[p].getName()) ;
+    		String line = p == idCurrentPlayer ? "* ":"  " ;
+    		line += players[p].getName() + "(" + players[p].getScoreTotal() + ")" ;
+    		for (int idRound = 0 ; idRound <= currentRound ; idRound++) {
+    			line += "\t";
+    			for (int idThrow = 0 ; idThrow < maxThrowRound ; idThrow++) {
+    				line += players[p].getScoreThrow(idRound, idThrow) != 10 ? players[p].getScoreThrow(idRound, idThrow) : "X" ;
+    				line += " " ;
+    			}
+    		}
+    		
+    		System.out.println(line) ;
     	}
     	System.out.println("---------------------------------------------------") ;
     	System.out.println("") ;
     }
-    
-    
 
     public static void main(String[] args) {
     	Scanner sc = new Scanner(System.in) ;
         Game g = new Game() ;
         g.init(sc);
-        g.run() ;
+        g.run(sc) ;
         sc.close() ;
     }
 
