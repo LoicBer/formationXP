@@ -9,6 +9,8 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.score = new int[10][2] ;
+        this.score[9] = new int[3] ;
     }
 
     public String getName() {

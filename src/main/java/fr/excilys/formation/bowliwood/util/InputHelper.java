@@ -13,15 +13,14 @@ public final class InputHelper {
 
     private InputHelper() {}
 
-    public static int nbPlayerInput() {
+    public static int nbPlayerInput(Scanner sc) {
         @SuppressWarnings("resource")
-        Scanner sin = new Scanner(System.in);
         boolean done = false;
         int in = 0;
         System.out.println("Entrer le nombre de joueurs");
         do {
             try {
-                in = parseInt(sin.nextLine()) ;
+                in = parseInt(sc.nextLine()) ;
                 if (in < 0) {
                     throw new NumberFormatException() ;
                 }
@@ -33,17 +32,16 @@ public final class InputHelper {
                 System.err.println("Entrer un nombre de joueurs valide");
             }
 
-        } while (!done && sin.hasNextLine());
+        } while (!done && sc.hasNextLine());
 
         return in;
     }
     
-    public static Player[] namePlayersInput(int nbPlayer) {
+    public static Player[] namePlayersInput(int nbPlayer, Scanner sc) {
     	Player[] names =  new Player[nbPlayer] ;
-    	Scanner sin =  new Scanner(System.in) ;
     	for (int i = 0 ; i < nbPlayer ; i++) {
     		System.out.println("Entrer le nom du joueur " + (i+1) ) ;
-    		names[i] = new Player(sin.nextLine()) ;
+    		names[i] = new Player(sc.nextLine()) ;
     	}
     	return names ;
     }

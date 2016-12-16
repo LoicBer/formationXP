@@ -17,5 +17,15 @@ public class OutPutHelper {
 			   }
 			}
 	}
+	
+	
+    public static void clearOutput() {
+    	try {
+    		Runtime.getRuntime().exec("clear");
+    	} catch (IOException e) {
+    		
+    	}
+    }
+	
 
 }

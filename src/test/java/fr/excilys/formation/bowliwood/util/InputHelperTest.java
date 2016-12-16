@@ -1,5 +1,7 @@
 package fr.excilys.formation.bowliwood.util;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**
@@ -8,6 +10,6 @@ import org.junit.Test;
 public class InputHelperTest {
     @Test
     public void testInput() {
-
+    	assertEquals(true,true) ;
     }
 }
